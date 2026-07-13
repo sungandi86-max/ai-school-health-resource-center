@@ -7,10 +7,11 @@ type CopyStatus = "idle" | "success" | "error";
 
 type CopyResourceButtonProps = {
   readonly text: string;
+  readonly idleLabel?: string;
   readonly className?: string;
 };
 
-const buttonLabel = (status: CopyStatus): string => {
+const buttonLabel = (status: CopyStatus, idleLabel: string): string => {
   if (status === "success") {
     return "복사했습니다";
   }
@@ -19,10 +20,10 @@ const buttonLabel = (status: CopyStatus): string => {
     return "복사하지 못했습니다";
   }
 
-  return "전체 복사";
+  return idleLabel;
 };
 
-export function CopyResourceButton({ text, className = "" }: CopyResourceButtonProps) {
+export function CopyResourceButton({ text, idleLabel = "전체 복사", className = "" }: CopyResourceButtonProps) {
   const [status, setStatus] = useState<CopyStatus>("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const Icon = status === "success" ? Check : status === "error" ? AlertCircle : Copy;
@@ -69,7 +70,7 @@ export function CopyResourceButton({ text, className = "" }: CopyResourceButtonP
       onClick={copyText}
     >
       <Icon aria-hidden="true" size={17} />
-      <span aria-live="polite">{buttonLabel(status)}</span>
+      <span aria-live="polite">{buttonLabel(status, idleLabel)}</span>
     </button>
   );
 }

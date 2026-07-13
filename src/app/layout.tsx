@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI 보건교사 자료실",
-  description: "보건교사의 AI 업무를 위한 프롬프트, 템플릿, Workflow 자료 플랫폼입니다.",
+  title: "실전 프롬프트 자료실 | AI School Health Resource Center",
+  description: "『보건교사를 위한 AI 업무 자동화』에서 사용하는 최신 프롬프트를 복사하고 다운로드하세요.",
 };
 
 export default function RootLayout({

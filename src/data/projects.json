@@ -1,0 +1,52 @@
+[
+  {
+    "id": "project-online-health-room",
+    "title": "온라인 보건실",
+    "description": "반복 안내, 제출센터, 교육자료, FAQ를 한곳에서 연결하는 보건 업무 포털입니다.",
+    "thumbnail": "",
+    "github": "https://github.com/sungandi86-max/ai-school-health-resource-center",
+    "demo": "/projects/online-health-room",
+    "status": "운영 중",
+    "technologies": ["Next.js", "Google Sheets", "Apps Script"]
+  },
+  {
+    "id": "project-school-health-hub",
+    "title": "School Health Hub",
+    "description": "보건 업무 서비스와 자료실을 하나의 대시보드로 연결하는 통합 허브 구조입니다.",
+    "thumbnail": "",
+    "github": "https://github.com/sungandi86-max/ai-school-health-resource-center",
+    "demo": "/projects/school-health-hub",
+    "status": "개발 중",
+    "technologies": ["Next.js", "Codex", "Vercel"]
+  },
+  {
+    "id": "project-health-check-workspace",
+    "title": "학생건강검진 Workspace",
+    "description": "검진 일정, 안내문, 학급 단위 진행 현황을 개인정보 없이 정리하는 Workspace입니다.",
+    "thumbnail": "",
+    "github": "https://github.com/sungandi86-max/ai-school-health-resource-center",
+    "demo": "/projects/student-health-check-workspace",
+    "status": "MVP 완료",
+    "technologies": ["ChatGPT", "Google Sheets", "Apps Script"]
+  },
+  {
+    "id": "project-document-helper",
+    "title": "공문도우미",
+    "description": "공문 요약, 해야 할 일 추출, 일정 정리를 하나의 업무 흐름으로 묶은 사례입니다.",
+    "thumbnail": "",
+    "github": "https://github.com/sungandi86-max/ai-school-health-resource-center",
+    "demo": "/projects/health-document-assistant",
+    "status": "사례 공개",
+    "technologies": ["ChatGPT Work", "Claude Code", "GitHub"]
+  },
+  {
+    "id": "project-ebook-studio",
+    "title": "eBook Studio",
+    "description": "원고 구조화, AI 검토, 페이지 설계, 추가 자료 연결을 지원하는 제작 시스템입니다.",
+    "thumbnail": "",
+    "github": "https://github.com/sungandi86-max/ai-school-health-resource-center",
+    "demo": "/projects/school-health-ebook-production-system",
+    "status": "MVP 완료",
+    "technologies": ["ChatGPT Work", "Markdown", "PDF"]
+  }
+]

@@ -14,8 +14,7 @@ type TemplateCardProps = {
 
 const formatDate = (date: string): string => date.replaceAll("-", ".");
 
-const getActionHref = (template: Template): string =>
-  template.copyUrl ?? template.downloadUrl ?? `/templates/${template.slug}`;
+const getActionHref = (template: Template): string | undefined => template.copyUrl ?? template.downloadUrl;
 
 export function TemplateCard({ template }: TemplateCardProps) {
   const action = templateActionMeta(template.templateType);
@@ -71,14 +70,26 @@ export function TemplateCard({ template }: TemplateCardProps) {
             자세히
             <ArrowRight aria-hidden="true" size={16} />
           </Link>
-          <a
-            href={actionHref}
-            download={template.downloadUrl ? true : undefined}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[var(--color-status-success)] px-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-status-success-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-status-success)]"
-          >
-            <TemplateActionIcon kind={action.icon} />
-            {action.cardLabel}
-          </a>
+          {actionHref ? (
+            <a
+              href={actionHref}
+              download={template.downloadUrl ? true : undefined}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[var(--color-status-success)] px-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-status-success-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-status-success)]"
+            >
+              <TemplateActionIcon kind={action.icon} />
+              {action.cardLabel}
+            </a>
+          ) : (
+            <button
+              type="button"
+              disabled
+              aria-label={`${template.title} ${action.cardLabel}`}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[var(--color-surface-muted)] px-3 text-sm font-semibold text-[var(--color-text-tertiary)]"
+            >
+              <TemplateActionIcon kind={action.icon} />
+              준비 중
+            </button>
+          )}
         </div>
       </div>
     </article>

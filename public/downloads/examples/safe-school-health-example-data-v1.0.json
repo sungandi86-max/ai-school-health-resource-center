@@ -1,0 +1,37 @@
+{
+  "version": "v1.0",
+  "notice": "모든 데이터는 가상이며 개인을 식별할 수 있는 정보를 포함하지 않습니다.",
+  "schoolContext": {
+    "schoolLevel": "고등학교",
+    "classCount": 24,
+    "staffCountRange": "70~90명"
+  },
+  "tasks": [
+    {
+      "taskId": "TASK-001",
+      "category": "건강검진",
+      "title": "검진 일정 안내",
+      "dueDate": "2026-08-28",
+      "status": "준비 중"
+    },
+    {
+      "taskId": "TASK-002",
+      "category": "교직원 건강관리",
+      "title": "제출 현황 확인",
+      "dueDate": "2026-09-04",
+      "status": "안내 예정"
+    }
+  ],
+  "classSummary": [
+    {
+      "classLabel": "1학년 A반",
+      "targetCount": 28,
+      "completedCount": 0
+    },
+    {
+      "classLabel": "1학년 B반",
+      "targetCount": 29,
+      "completedCount": 0
+    }
+  ]
+}

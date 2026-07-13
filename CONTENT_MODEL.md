@@ -1,5 +1,84 @@
 # AI 보건교사 자료실 Content Model
 
+## CMS JSON 데이터 구조
+
+Book Resource Hub는 React 코드가 아니라 `src/data/*.json`을 기준으로 렌더링합니다.
+새 전자책은 `books.json`에 책 정보를 추가하고, `resources.json`에 같은 `bookId`를 가진
+자료를 추가하면 `/book/[bookId]`와 홈 자료 허브에 자동으로 표시됩니다.
+
+```text
+src/data/
+├─ books.json
+├─ resources.json
+├─ categories.json
+├─ projects.json
+├─ updates.json
+└─ faq.json
+```
+
+```ts
+type CmsBook = {
+  readonly id: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly cover: string;
+  readonly description: string;
+  readonly version: string;
+  readonly publishedAt: string;
+  readonly updatedAt: string;
+  readonly qr: string;
+  readonly status: string;
+};
+
+type CmsResource = {
+  readonly id: string;
+  readonly bookId: string;
+  readonly chapter: number;
+  readonly title: string;
+  readonly description: string;
+  readonly category: string;
+  readonly fileType: string;
+  readonly fileName: string;
+  readonly filePath: string;
+  readonly fileSize: string;
+  readonly version: string;
+  readonly updatedAt: string;
+  readonly changeNote?: string;
+  readonly tags: readonly string[];
+  readonly isNew: boolean;
+  readonly isUpdated: boolean;
+  readonly isFeatured: boolean;
+  readonly status: "available" | "coming-soon" | "updated" | "archived" | "unavailable";
+  readonly downloadCount: number;
+  readonly previousVersions: readonly {
+    readonly version: string;
+    readonly fileType: string;
+    readonly fileName: string;
+    readonly filePath: string;
+    readonly fileSize: string;
+    readonly updatedAt: string;
+    readonly changeNote?: string;
+    readonly status: "available" | "coming-soon" | "updated" | "archived" | "unavailable";
+  }[];
+};
+```
+
+`src/data/resources.json`이 Book Resource Hub의 최신 다운로드 자료 기준입니다. `filePath`는
+`/public/downloads` 아래에 실제로 존재하는 정적 파일을 가리키며, `scripts/validate-downloads.mjs`가
+빌드 전에 다운로드 가능 상태의 파일 경로, 파일명, 버전, 실제 파일 존재 여부를 검사합니다.
+`status`가 `coming-soon` 또는 `unavailable`이면 다운로드 버튼을 비활성화하고, `previousVersions`는
+최신 자료와 구분되는 `archived` 버전 기록으로 표시합니다. 다운로드 횟수는 정적 데이터 값이며
+현재 클릭으로 증가시키지 않습니다. 개인 브라우저의 최근 다운로드 목록만 localStorage에 최대 5개까지 저장합니다.
+
+기존 `/resources`와 `/templates` 화면은 각각 `src/data/resources.ts`, `src/data/templates.ts`를
+사용하는 별도 레거시 모델입니다. 이 모델들은 기존 경로 호환성을 위해 유지하며, 새 Book Resource Hub
+자료를 추가할 때는 반드시 `src/data/resources.json`의 CMS 필드를 사용합니다.
+
+CMS 데이터는 `src/lib/cms.ts`에서 검색, 필터, 정렬, 장별 그룹화, 책별 요약으로 변환합니다.
+UI 컴포넌트는 `BookCard`, `ResourceCard`, `ProjectCard`, `CategoryChip`, `SearchBox`,
+`FilterBar`, `DownloadButton`, `TagBadge`, `UpdateTimeline`처럼 데이터에 독립적인 단위로
+유지합니다.
+
 ## Resource 데이터 모델
 
 ```ts
@@ -206,7 +285,10 @@ type Template = {
 };
 ```
 
-초기 버전에서는 로컬 샘플 데이터와 placeholder URL을 사용합니다. 다음 단계에서 Google Drive, Google Docs, Google Sheets 복사 URL과 실제 다운로드 파일을 연결할 수 있도록 `downloadUrl`과 `copyUrl`을 분리합니다.
+기존 Template Center는 로컬 샘플 데이터와 `downloadUrl`/`copyUrl`을 사용하는 별도 모델입니다.
+실제 Book Resource Hub 정적 다운로드 자료는 `src/data/resources.json`과 `public/downloads`를
+사용하며, Template Center의 외부 Google Drive, Google Docs, Google Sheets 연결은 후속 단계에서
+별도로 연동합니다.
 
 ## Markdown 또는 MDX frontmatter 예시
 

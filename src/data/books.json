@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ai-work-automation",
+    "title": "보건교사를 위한 AI 업무 자동화",
+    "subtitle": "보건교사를 위한 AI 업무 자동화 실전 자료실",
+    "cover": "/book/ai-work-automation",
+    "description": "프롬프트, 템플릿, Workflow, 프로젝트 사례를 연결하는 실전 안내서입니다.",
+    "version": "출간 준비판 v1.0",
+    "publishedAt": "2026-07-30",
+    "updatedAt": "2026-07-13",
+    "qr": "/book/ai-work-automation",
+    "status": "출간 준비 중"
+  },
+  {
+    "id": "ai-health-class",
+    "title": "AI 보건교육 자료 제작 노트",
+    "subtitle": "보건교육 콘텐츠 제작을 위한 확장 자료",
+    "cover": "/book/ai-health-class",
+    "description": "보건교육 자료, 강의안, 실습 데이터를 제작하는 확장 전자책 자료 구조 예시입니다.",
+    "version": "기획안 v0.1",
+    "publishedAt": "2026-09-01",
+    "updatedAt": "2026-07-14",
+    "qr": "/book/ai-health-class",
+    "status": "기획 중"
+  }
+]

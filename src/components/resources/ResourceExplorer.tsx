@@ -44,12 +44,12 @@ export function ResourceExplorer({ resources }: ResourceExplorerProps) {
             <span aria-hidden="true" className="px-2">
               /
             </span>
-            <span className="font-semibold text-[var(--color-text-primary)]">자료 찾기</span>
+            <span className="font-semibold text-[var(--color-text-primary)]">다운로드</span>
           </nav>
           <div>
-            <h1 className="text-3xl font-semibold leading-tight">자료 찾기</h1>
+            <h1 className="text-3xl font-semibold leading-tight">다운로드</h1>
             <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)]">
-              업무, 도구, 자료 유형을 선택하여 지금 필요한 AI 실무 자료를 찾아보세요.
+              자료 목록을 검색하고 카테고리, 도구, 난이도 기준으로 필요한 자료를 찾아보세요.
             </p>
           </div>
         </header>

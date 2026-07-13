@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { DocsLoadingSkeleton } from "@/components/layout/DocsLoadingSkeleton";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ProjectExplorer } from "@/components/projects/ProjectExplorer";
@@ -17,11 +18,7 @@ export default function ProjectsPage() {
       <SiteHeader />
       <Suspense
         fallback={
-          <main className="min-h-dvh bg-[var(--color-surface-subtle)] px-5 py-10 text-[var(--color-text-primary)]">
-            <div className="mx-auto w-full max-w-6xl rounded-lg border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] p-6">
-              프로젝트 사례를 준비하고 있습니다.
-            </div>
-          </main>
+          <DocsLoadingSkeleton label="프로젝트 사례를 준비하고 있습니다." />
         }
       >
         <ProjectExplorer projects={publishedProjects} />

@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run validate:downloads",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate:downloads": "node scripts/validate-downloads.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.24.0",

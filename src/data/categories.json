@@ -1,0 +1,10 @@
+[
+  { "id": "prompt", "label": "Prompt", "description": "AI 도구에 입력하는 실전 프롬프트" },
+  { "id": "template", "label": "Template", "description": "업무에 맞게 수정하는 문서와 시트" },
+  { "id": "workflow", "label": "Workflow", "description": "업무를 단계별로 실행하는 절차" },
+  { "id": "project", "label": "Project", "description": "실제 업무 시스템과 사례" },
+  { "id": "lecture", "label": "Lecture", "description": "연수와 강의 실습 자료" },
+  { "id": "pdf", "label": "PDF", "description": "다운로드 가능한 PDF 자료" },
+  { "id": "video", "label": "Video", "description": "영상 강의와 화면 시연" },
+  { "id": "guide", "label": "Guide", "description": "사용 방법과 체크리스트" }
+]

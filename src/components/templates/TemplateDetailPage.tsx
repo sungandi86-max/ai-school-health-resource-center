@@ -15,8 +15,7 @@ type TemplateDetailPageProps = {
 
 const formatDate = (date: string): string => date.replaceAll("-", ".");
 
-const getActionHref = (template: Template): string =>
-  template.copyUrl ?? template.downloadUrl ?? "/templates";
+const getActionHref = (template: Template): string | undefined => template.copyUrl ?? template.downloadUrl;
 
 const isExternalHref = (href: string): boolean => href.startsWith("https://");
 
@@ -48,8 +47,23 @@ function InfoList({
 
 function PrimaryAction({ template }: TemplateDetailPageProps) {
   const href = getActionHref(template);
-  const external = isExternalHref(href);
   const action = templateActionMeta(template.templateType);
+
+  if (!href) {
+    return (
+      <button
+        type="button"
+        disabled
+        aria-label={`${template.title} ${action.detailLabel}`}
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-[var(--color-surface-muted)] px-4 text-sm font-semibold text-[var(--color-text-tertiary)]"
+      >
+        <TemplateActionIcon kind={action.icon} size={17} />
+        준비 중
+      </button>
+    );
+  }
+
+  const external = isExternalHref(href);
 
   return (
     <a

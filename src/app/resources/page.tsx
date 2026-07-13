@@ -1,8 +1,15 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
+import { DocsLoadingSkeleton } from "@/components/layout/DocsLoadingSkeleton";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ResourceExplorer } from "@/components/resources/ResourceExplorer";
 import { publishedResources } from "@/lib/resources";
+
+export const metadata: Metadata = {
+  title: "다운로드 | AI School Health Resource Center",
+  description: "프롬프트, 템플릿, Workflow, 프로젝트 자료를 검색하고 필터링해 다운로드 자료를 찾습니다.",
+};
 
 export default function ResourcesPage() {
   return (
@@ -10,11 +17,7 @@ export default function ResourcesPage() {
       <SiteHeader />
       <Suspense
         fallback={
-          <main className="min-h-dvh bg-[var(--color-surface-subtle)] px-5 py-10 text-[var(--color-text-primary)]">
-            <div className="mx-auto w-full max-w-6xl rounded-lg border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] p-6">
-              자료 찾기를 준비하고 있습니다.
-            </div>
-          </main>
+          <DocsLoadingSkeleton label="다운로드 자료를 준비하고 있습니다." />
         }
       >
         <ResourceExplorer resources={publishedResources} />

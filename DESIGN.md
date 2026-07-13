@@ -2,7 +2,7 @@
 
 ## 1. Atmosphere & Identity
 
-조용하고 신뢰감 있는 업무 자료실입니다. Apple의 여백, Notion의 문서성, Linear의 정돈된 밀도, ChatGPT와 Cursor의 작업 중심 흐름을 참고하되 보건교사가 바로 사용할 수 있는 SaaS형 업무 도구처럼 느껴지게 합니다. 시그니처는 화이트 표면 위의 연한 블루 그레이 배경과 네이비 텍스트, 파란 탐색 액션, 초록 성공 액션입니다.
+조용하고 신뢰감 있는 공식 전자책 자료실입니다. Apple의 여백, Notion의 문서성, Linear의 정돈된 밀도, OpenAI Docs와 Vercel Dashboard의 전문적인 Resource Center 감각을 참고하되 보건교사가 바로 사용할 수 있는 SaaS형 업무 자료 허브처럼 느껴지게 합니다. 시그니처는 화이트 표면, 아주 연한 블루 그레이 배경, 네이비 브랜드 텍스트, 파란 탐색 액션, 초록 성공·다운로드 액션입니다.
 
 ## 2. Color
 
@@ -10,15 +10,18 @@
 
 | Role | Token | Value | Usage |
 |---|---|---:|---|
+| Brand/primary | `--color-brand-primary` | `#183B66` | 서비스명, 주요 제목, 진한 CTA |
+| Brand/secondary | `--color-brand-secondary` | `#4A90E2` | 검색, 링크, 탐색 액션 |
 | Surface/primary | `--color-surface-primary` | `#FFFFFF` | 주요 화면 배경, 카드 |
-| Surface/subtle | `--color-surface-subtle` | `#F6F8FB` | 페이지 배경 |
-| Surface/muted | `--color-surface-muted` | `#F9FBFD` | 카드 내부 보조 영역 |
-| Text/primary | `--color-text-primary` | `#102033` | 제목, 본문 핵심 텍스트 |
-| Text/secondary | `--color-text-secondary` | `#526174` | 설명, 도움말 |
-| Border/default | `--color-border-default` | `#D9E2EC` | 카드, 입력창, 필터 경계 |
-| Border/subtle | `--color-border-subtle` | `#E8EEF5` | 부드러운 구분선 |
-| Action/search | `--color-action-primary` | `#2563EB` | 검색, 주요 탐색, 링크 |
-| Action/hover | `--color-action-hover` | `#1D4ED8` | 주요 액션 hover |
+| Surface/subtle | `--color-surface-subtle` | `#F8FAFC` | 페이지 배경 |
+| Surface/muted | `--color-surface-muted` | `#F5F8FC` | 카드 내부 보조 영역 |
+| Surface/blue | `--color-surface-blue` | `#EAF3FF` | 프로젝트 미리보기, 약한 블루 표면 |
+| Text/primary | `--color-text-primary` | `#183B66` | 제목, 본문 핵심 텍스트 |
+| Text/secondary | `--color-text-secondary` | `#526579` | 설명, 도움말 |
+| Border/default | `--color-border-default` | `#D7E0EA` | 카드, 입력창, 필터 경계 |
+| Border/subtle | `--color-border-subtle` | `#E7EDF4` | 부드러운 구분선 |
+| Action/search | `--color-action-primary` | `#4A90E2` | 검색, 주요 탐색, 링크 |
+| Action/hover | `--color-action-hover` | `#2F73C8` | 주요 액션 hover |
 | Status/success | `--color-status-success` | `#168A4A` | 복사, 다운로드, 성공 상태 |
 | Status/success-muted | `--color-status-success-muted` | `#EAF7EF` | 성공 배지 배경 |
 | Status/warning | `--color-status-warning` | `#B7791F` | 주의 안내 |
@@ -77,8 +80,8 @@
 
 - 모바일 우선으로 설계합니다.
 - 모바일 기본 좌우 여백은 20px입니다.
-- PC 최대 콘텐츠 폭은 1120px을 기본으로 합니다.
-- 홈은 거대한 Hero가 아니라 실제 업무 탐색 진입점으로 구성합니다.
+- PC 최대 콘텐츠 폭은 1120~1200px을 기본으로 합니다.
+- 홈은 거대한 Hero가 아니라 공식 자료실의 컴팩트한 진입점과 Resource Hub로 구성합니다.
 
 ## 5. Components
 
@@ -109,6 +112,24 @@
 - Spacing: mobile `--space-4`, desktop `--space-6`
 - States: default, hover, focus, selected
 - Depth: 얇은 border 중심, shadow는 사용하지 않거나 매우 약하게 사용합니다.
+- Official Resource Hub 카드는 `20px` radius와 Vercel식 shadow-as-border를 사용합니다.
+- 일반 업무 앱 카드와 목록 카드는 기존처럼 8~12px radius를 사용할 수 있습니다.
+
+### Chapter Resource Accordion
+
+- 전자책 연계 자료는 파일 목록보다 Chapter 학습 흐름을 먼저 보여줍니다.
+- 기본 상태는 Chapter 1만 펼치고, 검색 또는 필터 적용 시 관련 Chapter를 자동으로 펼칩니다.
+- 각 Chapter 하단에는 책에서 사용하는 페이지를 `P.42` 형식의 작은 칩으로 표시합니다.
+- 자료 카드에는 제목, 설명, 버전, 업데이트일, 파일 형식, 다운로드 액션을 일관되게 노출합니다.
+
+### Official Documentation Hub
+
+- 상단 Navigation은 `Home`, `전자책`, `다운로드`, `프로젝트`, `업데이트`, `FAQ`를 기본으로 합니다.
+- Quick Access 카드는 전자책, 실전 프롬프트, 업무 템플릿, 예제 프로젝트 네 가지 주요 진입점을 제공합니다.
+- 프로젝트 카드는 실제 이미지가 없을 때 의미 없는 placeholder 이미지를 쓰지 않고, 시스템 구조를 암시하는 경량 DOM 썸네일을 사용합니다.
+- Release Notes와 FAQ는 문서 사이트처럼 버전, 날짜, 질문을 빠르게 스캔할 수 있는 카드와 Accordion 구조를 사용합니다.
+- 다운로드 자료에는 최근 본 자료, 추천 자료, 관련 자료를 구분해 탐색 맥락을 제공합니다.
+- Suspense fallback은 텍스트 박스가 아니라 실제 카드 구조를 암시하는 Loading Skeleton을 사용합니다.
 
 ### Filter
 
@@ -125,6 +146,7 @@
 
 - 레이아웃 속성 대신 `transform`, `opacity`, `color`, `background-color`, `border-color` 중심으로 전환합니다.
 - 애니메이션은 상태 변화를 설명할 때만 사용합니다.
+- 카드 hover는 미세한 `transform`과 border/shadow 변화만 사용합니다.
 - `prefers-reduced-motion`을 존중합니다.
 
 ## 7. Depth & Surface
@@ -135,7 +157,8 @@
 |---|---|---|
 | Default border | `1px solid var(--color-border-default)` | 카드, 입력창 |
 | Subtle border | `1px solid var(--color-border-subtle)` | 보조 구분 |
-| Optional shadow | `0 1px 2px rgba(16, 32, 51, 0.04)` | 필요한 경우의 아주 약한 표면 분리 |
+| Optional shadow | `0 1px 2px rgba(24, 59, 102, 0.04)` | 필요한 경우의 아주 약한 표면 분리 |
+| Official card shadow | `0 0 0 1px rgba(24, 59, 102, 0.08), 0 2px 2px rgba(24, 59, 102, 0.03), 0 12px 24px -18px rgba(24, 59, 102, 0.24)` | 공식 자료실 카드 |
 
 ## 사용하면 안 되는 디자인 요소
 

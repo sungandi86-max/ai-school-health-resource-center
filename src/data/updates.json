@@ -1,0 +1,26 @@
+[
+  {
+    "id": "release-1-2-0",
+    "version": "v1.2.0",
+    "date": "2026-07-13",
+    "title": "Documentation & Resource Center 개편",
+    "description": "ChatGPT Prompt 추가, Workflow 개선, 템플릿 수정을 반영했습니다.",
+    "changes": ["ChatGPT Prompt 추가", "Workflow 개선", "템플릿 수정"]
+  },
+  {
+    "id": "release-1-1-0",
+    "version": "v1.1.0",
+    "date": "2026-07-05",
+    "title": "전자책 연계 자료 보완",
+    "description": "PDF 추가, 강의자료 업데이트, Chapter별 자료 연결을 보완했습니다.",
+    "changes": ["PDF 추가", "강의자료 업데이트", "Chapter별 자료 연결"]
+  },
+  {
+    "id": "release-1-0-0",
+    "version": "v1.0.0",
+    "date": "2026-06-30",
+    "title": "Resource Center 공개",
+    "description": "프롬프트 자료, 템플릿 자료실, 프로젝트 사례를 처음 공개했습니다.",
+    "changes": ["프롬프트 자료 공개", "템플릿 자료실 구성", "프로젝트 사례 추가"]
+  }
+]
