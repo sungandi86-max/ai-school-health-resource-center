@@ -24,16 +24,49 @@ type Resource = {
 ## Workflow 데이터 모델
 
 ```ts
-type Workflow = {
+type WorkflowStep = {
+  readonly title: string;
+  readonly description: string;
+  readonly minutes: number;
+  readonly tools: readonly string[];
+  readonly resourceIds: readonly string[];
+};
+
+type WorkflowExample = {
+  readonly schoolType: string;
+  readonly scale: string;
+  readonly context: string;
+  readonly result: string;
+};
+
+type WorkflowModel = {
+  readonly id: string;
   readonly slug: string;
   readonly title: string;
   readonly summary: string;
-  readonly jobContext: string;
-  readonly steps: readonly string[];
-  readonly requiredResourceSlugs: readonly string[];
-  readonly outputExamples: readonly string[];
-  readonly ebookChapters: readonly string[];
+  readonly difficulty: "ready" | "guided" | "automation";
+  readonly estimatedMinutes: number;
+  readonly category:
+    | "공문 작성"
+    | "건강검진"
+    | "감염병"
+    | "보건교육"
+    | "교직원"
+    | "자동화"
+    | "콘텐츠 제작"
+    | "온라인 보건실";
+  readonly tools: readonly string[];
+  readonly tags: readonly string[];
   readonly updatedAt: string;
+  readonly problem: readonly string[];
+  readonly steps: readonly WorkflowStep[];
+  readonly resources: readonly string[];
+  readonly outputs: readonly string[];
+  readonly cautions: readonly string[];
+  readonly relatedWorkflowIds: readonly string[];
+  readonly example: WorkflowExample;
+  readonly isPublished: boolean;
+  readonly isFeatured: boolean;
 };
 ```
 
