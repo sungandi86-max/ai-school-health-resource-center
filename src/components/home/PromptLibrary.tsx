@@ -2,7 +2,6 @@
 
 import { Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { DownloadButton } from "@/components/cms/DownloadButton";
 import { CopyResourceButton } from "@/components/resources/CopyResourceButton";
 import { PROMPT_CATEGORIES, promptLibraryItems, type PromptCategory, type PromptLibraryItem } from "@/data/promptLibrary";
 
@@ -43,11 +42,11 @@ export function PromptLibrary() {
             실전 프롬프트 자료실
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
-            『보건교사를 위한 AI 업무 자동화』에서 사용하는 최신 프롬프트를 복사하거나 다운로드할 수 있습니다.
+            『보건교사를 위한 AI 업무 자동화』에서 사용하는 최신 프롬프트를 찾아 바로 복사할 수 있습니다.
           </p>
         </section>
 
-        <section id="prompts" className="mt-8 rounded-[20px] bg-white p-4 shadow-[var(--shadow-card)] sm:mt-10 sm:p-5" aria-labelledby="prompt-search-title">
+        <section id="prompts" className="mt-8 scroll-mt-20 rounded-[20px] bg-white p-4 shadow-[var(--shadow-card)] sm:mt-10 sm:p-5" aria-labelledby="prompt-search-title">
           <div className="flex items-center justify-between gap-4">
             <div>
               <h2 id="prompt-search-title" className="text-lg font-semibold text-[var(--color-brand-primary)]">
@@ -140,7 +139,7 @@ function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
   const preview = content.replace(/\s+/g, " ").trim().slice(0, 180);
 
   return (
-    <article className="flex min-h-[390px] flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-6">
+    <article className="flex flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-6">
       <div className="flex flex-wrap gap-2">
         <span className="rounded-full bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-action-primary)]">
           프롬프트
@@ -167,20 +166,8 @@ function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
         ))}
       </div>
 
-      <div className="mt-auto grid gap-3 pt-5 sm:grid-cols-2">
-        <CopyResourceButton text={content} idleLabel="복사" className="w-full" />
-        {item.download ? (
-          <DownloadButton resourceId={item.id} resourceTitle={item.title} download={item.download} label="다운로드" className="w-full" />
-        ) : (
-          <button
-            type="button"
-            disabled
-            aria-label={`${item.title} 다운로드`}
-            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-surface-muted)] px-4 text-sm font-semibold text-[var(--color-text-tertiary)]"
-          >
-            다운로드 준비 중
-          </button>
-        )}
+      <div className="pt-5">
+        <CopyResourceButton text={content} idleLabel="프롬프트 복사" className="w-full" />
       </div>
     </article>
   );
