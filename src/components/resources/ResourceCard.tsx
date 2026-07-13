@@ -9,50 +9,64 @@ type ResourceCardProps = {
 const formatDate = (date: string): string => date.replaceAll("-", ".");
 
 export function ResourceCard({ resource }: ResourceCardProps) {
+  const hiddenTagCount = Math.max(resource.tags.length - 3, 0);
+
   return (
-    <article className="flex h-full flex-col rounded-lg border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] p-4 shadow-[var(--shadow-subtle)]">
-      <div className="flex flex-wrap gap-2">
-        <span className="rounded-md bg-[var(--color-action-muted)] px-2 py-1 text-xs font-semibold text-[var(--color-action-primary)]">
+    <article className="flex h-full flex-col rounded-lg border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] p-4 shadow-[var(--shadow-subtle)] transition-colors hover:border-[var(--color-action-primary)] sm:p-5">
+      <div className="flex min-h-8 flex-wrap gap-2">
+        <span className="inline-flex min-h-7 items-center rounded-md bg-[var(--color-action-muted)] px-2 py-1 text-xs font-semibold text-[var(--color-action-primary)]">
           {RESOURCE_TYPES[resource.resourceType]}
         </span>
         {resource.relatedBook ? (
-          <span className="rounded-md bg-[var(--color-status-success-muted)] px-2 py-1 text-xs font-semibold text-[var(--color-status-success)]">
+          <span className="inline-flex min-h-7 items-center rounded-md bg-[var(--color-status-success-muted)] px-2 py-1 text-xs font-semibold text-[var(--color-status-success)]">
             전자책 연계
           </span>
         ) : null}
         {resource.tools.slice(0, 2).map((tool) => (
           <span
             key={tool}
-            className="rounded-md border border-[var(--color-border-subtle)] px-2 py-1 text-xs font-medium text-[var(--color-text-secondary)]"
+            className="inline-flex min-h-7 items-center rounded-md border border-[var(--color-border-subtle)] bg-white px-2 py-1 text-xs font-medium text-[var(--color-text-secondary)]"
           >
             {tool}
           </span>
         ))}
       </div>
 
-      <div className="mt-4 grid gap-2">
-        <h3 className="text-lg font-semibold leading-snug text-[var(--color-text-primary)]">
-          {resource.title}
+      <div className="mt-4 grid gap-2.5">
+        <h3 className="text-[17px] font-semibold leading-snug">
+          <Link
+            href={`/resources/${resource.slug}`}
+            className="inline-flex min-h-11 items-center text-[var(--color-text-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
+          >
+            {resource.title}
+          </Link>
         </h3>
-        <p className="text-sm leading-6 text-[var(--color-text-secondary)]">{resource.summary}</p>
+        <p className="line-clamp-3 text-sm leading-[1.6] text-[var(--color-text-secondary)]">
+          {resource.summary}
+        </p>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {resource.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="rounded-md bg-[var(--color-surface-muted)] px-2 py-1 text-xs text-[var(--color-text-secondary)]"
+            className="inline-flex min-h-7 items-center rounded-md bg-[var(--color-surface-muted)] px-2 py-1 text-xs text-[var(--color-text-secondary)]"
           >
             {tag}
           </span>
         ))}
+        {hiddenTagCount > 0 ? (
+          <span className="inline-flex min-h-7 items-center rounded-md bg-[var(--color-surface-muted)] px-2 py-1 text-xs font-medium text-[var(--color-text-secondary)]">
+            +{hiddenTagCount}
+          </span>
+        ) : null}
       </div>
 
       <div className="mt-auto grid gap-3 pt-5">
         <p className="text-xs text-[var(--color-text-secondary)]">
           {DIFFICULTIES[resource.difficulty]} · 업데이트 {formatDate(resource.updatedAt)}
         </p>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid gap-2 min-[420px]:grid-cols-2">
           <Link
             href={`/resources/${resource.slug}`}
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-[var(--color-border-default)] px-3 text-sm font-semibold text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"

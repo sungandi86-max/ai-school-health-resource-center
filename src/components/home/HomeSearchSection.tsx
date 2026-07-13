@@ -23,7 +23,7 @@ export function HomeSearchSection() {
   };
 
   return (
-    <div className="grid gap-8">
+    <div className="grid gap-6 lg:gap-8">
       <SearchPanel
         draftQuery={draftQuery}
         resultCount={resources.length}

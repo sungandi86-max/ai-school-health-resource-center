@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <SiteHeader />
       <main className="bg-[var(--color-surface-subtle)] text-[var(--color-text-primary)]">
-        <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 pb-12">
+        <div className="mx-auto grid w-full max-w-6xl gap-12 px-5 pb-14 sm:px-8 lg:gap-16 lg:pb-20">
           <HomeIntro />
           <HomeSearchSection />
           <WorkCategoryGrid />

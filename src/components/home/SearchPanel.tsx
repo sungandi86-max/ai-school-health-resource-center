@@ -26,12 +26,12 @@ export function SearchPanel({
   return (
     <section
       id="home-search"
-      className="scroll-mt-24 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] p-4 shadow-[var(--shadow-subtle)] sm:p-6"
+      className="scroll-mt-24 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] p-4 shadow-[var(--shadow-subtle)] sm:p-5"
       aria-labelledby="home-search-title"
     >
-      <div className="grid gap-4">
+      <div className="grid gap-3.5">
         <div>
-          <h2 id="home-search-title" className="text-xl font-semibold sm:text-2xl">
+          <h2 id="home-search-title" className="text-xl font-semibold">
             통합 검색
           </h2>
           <p className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)]">
@@ -43,7 +43,7 @@ export function SearchPanel({
           <label className="sr-only" htmlFor="home-resource-search">
             업무명이나 필요한 자료 검색
           </label>
-          <div className="flex min-h-12 items-center gap-2 rounded-md border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] px-3 focus-within:border-[var(--color-action-primary)] focus-within:ring-2 focus-within:ring-[var(--color-focus-ring)]">
+          <div className="grid min-h-[52px] grid-cols-[auto_minmax(0,1fr)] items-center gap-x-2 gap-y-2 rounded-md border border-[var(--color-border-default)] bg-[var(--color-surface-primary)] px-3 py-1.5 focus-within:border-[var(--color-action-primary)] focus-within:ring-2 focus-within:ring-[var(--color-focus-ring)] sm:flex sm:py-0">
             <Search aria-hidden="true" size={18} className="text-[var(--color-action-primary)]" />
             <input
               id="home-resource-search"
@@ -53,11 +53,11 @@ export function SearchPanel({
                 onDraftQueryChange(event.target.value);
               }}
               placeholder="업무명이나 필요한 자료를 검색하세요"
-              className="min-h-12 w-full bg-transparent text-base text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-tertiary)]"
+              className="min-h-11 w-full bg-transparent text-base text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-tertiary)]"
             />
             <button
               type="submit"
-              className="hidden min-h-10 min-w-16 items-center justify-center rounded-md bg-[var(--color-action-primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-action-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] sm:inline-flex"
+              className="col-span-2 inline-flex min-h-11 w-full items-center justify-center rounded-md bg-[var(--color-action-primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-action-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] sm:col-span-1 sm:min-h-10 sm:w-auto sm:min-w-20"
             >
               검색
             </button>
@@ -65,13 +65,17 @@ export function SearchPanel({
         </form>
 
         <div className="grid gap-2" aria-label="추천 검색어">
-          <p className="text-xs font-medium text-[var(--color-text-secondary)]">추천 검색어</p>
+          <p className="text-xs font-semibold text-[var(--color-text-secondary)]">추천 검색어</p>
           <div className="flex flex-wrap gap-2">
             {suggestedQueries.map((query) => (
               <button
                 key={query}
                 type="button"
-                className="min-h-10 rounded-md border border-[var(--color-border-subtle)] bg-[var(--color-surface-muted)] px-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
+                className={`min-h-10 rounded-md border px-3 text-[13px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] ${
+                  draftQuery.trim() === query
+                    ? "border-[var(--color-action-primary)] bg-[var(--color-action-muted)] text-[var(--color-action-primary)]"
+                    : "border-[var(--color-border-subtle)] bg-[var(--color-surface-muted)] text-[var(--color-text-secondary)] hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)]"
+                }`}
                 onClick={() => {
                   onDraftQueryChange(query);
                   onSearch(query);
