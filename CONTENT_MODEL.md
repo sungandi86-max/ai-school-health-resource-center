@@ -65,6 +65,43 @@ type UpdateLog = {
 };
 ```
 
+## Template 데이터 모델
+
+```ts
+type Template = {
+  readonly id: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly templateType:
+    | "googleSheets"
+    | "googleDocs"
+    | "pdf"
+    | "markdown"
+    | "zip"
+    | "checklist";
+  readonly category: "건강검진" | "감염병" | "보건교육" | "교직원" | "공문" | "자동화" | "전자책";
+  readonly tools: readonly string[];
+  readonly tags: readonly string[];
+  readonly difficulty: "ready" | "editable" | "automation";
+  readonly version: string;
+  readonly updatedAt: string;
+  readonly fileSize: string;
+  readonly downloadCount: number;
+  readonly coverImage?: string;
+  readonly description: string;
+  readonly includedFiles: readonly string[];
+  readonly usage: readonly string[];
+  readonly cautions: readonly string[];
+  readonly downloadUrl?: string;
+  readonly copyUrl?: string;
+  readonly isPublished: boolean;
+  readonly isFeatured: boolean;
+};
+```
+
+초기 버전에서는 로컬 샘플 데이터와 placeholder URL을 사용합니다. 다음 단계에서 Google Drive, Google Docs, Google Sheets 복사 URL과 실제 다운로드 파일을 연결할 수 있도록 `downloadUrl`과 `copyUrl`을 분리합니다.
+
 ## Markdown 또는 MDX frontmatter 예시
 
 ```yaml
