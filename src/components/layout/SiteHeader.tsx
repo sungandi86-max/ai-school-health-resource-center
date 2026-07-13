@@ -10,6 +10,7 @@ const navigationItems = [
   { label: "프롬프트", href: "/prompts" },
   { label: "템플릿", href: "/templates" },
   { label: "Workflow", href: "/workflows" },
+  { label: "프로젝트", href: "/projects" },
   { label: "업데이트", href: "/updates" },
 ] as const;
 

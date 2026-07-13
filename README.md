@@ -170,7 +170,7 @@ AI가 생성한 결과는 학교 규정과 최신 공식 지침을 확인한 후
 
 ## 연계 프로젝트
 
-향후 다음 프로젝트의 자료와 Workflow를 연결할 예정입니다.
+Project Center에서는 다음 프로젝트 사례를 가상 데이터 기반으로 제공하며, 관련 Workflow와 Resource를 함께 연결합니다.
 
 * 온라인 보건실
 * School Health Hub

@@ -73,17 +73,90 @@ type WorkflowModel = {
 ## Project 데이터 모델
 
 ```ts
+type ProjectStatus =
+  | "operating"
+  | "mvp"
+  | "developing"
+  | "case-study"
+  | "planned";
+
+type ProjectType =
+  | "work-system"
+  | "automation-tool"
+  | "resource-platform"
+  | "content-production"
+  | "education"
+  | "integrated-hub";
+
+type ProjectTool = {
+  readonly name: string;
+  readonly purpose: string;
+};
+
+type ProjectFeature = {
+  readonly title: string;
+  readonly description: string;
+  readonly icon?: string;
+};
+
+type ProjectOutcome = {
+  readonly type: "observed" | "expected" | "next";
+  readonly title: string;
+  readonly description: string;
+};
+
+type ProjectExample = {
+  readonly environment: readonly string[];
+  readonly situation: string;
+  readonly application: string;
+  readonly result: string;
+};
+
+type ProjectRevision = {
+  readonly version: string;
+  readonly date: string;
+  readonly description: string;
+};
+
 type Project = {
+  readonly id: string;
   readonly slug: string;
   readonly title: string;
   readonly summary: string;
-  readonly scenario: string;
-  readonly resourceSlugs: readonly string[];
-  readonly workflowSlugs: readonly string[];
-  readonly sampleDataPolicy: "fictional-only";
+  readonly overview: string;
+  readonly projectType: ProjectType;
+  readonly status: ProjectStatus;
+  readonly categories: readonly string[];
+  readonly tags: readonly string[];
+  readonly targetUsers: readonly string[];
+  readonly tools: readonly ProjectTool[];
+  readonly version: string;
+  readonly publishedAt?: string;
   readonly updatedAt: string;
+  readonly problems: readonly string[];
+  readonly goals: readonly string[];
+  readonly beforeItems: readonly string[];
+  readonly afterItems: readonly string[];
+  readonly features: readonly ProjectFeature[];
+  readonly architectureSteps: readonly {
+    readonly title: string;
+    readonly description: string;
+  }[];
+  readonly workflowIds: readonly string[];
+  readonly resourceIds: readonly string[];
+  readonly privacyPrinciples: readonly string[];
+  readonly outcomes: readonly ProjectOutcome[];
+  readonly recommendedFor: readonly string[];
+  readonly example?: ProjectExample;
+  readonly relatedProjectIds?: readonly string[];
+  readonly revisions?: readonly ProjectRevision[];
+  readonly externalUrl?: string;
+  readonly isPublished: boolean;
+  readonly isFeatured: boolean;
 };
 ```
+
+초기 버전에서는 `workflowIds`와 `resourceIds`로 로컬 공개 데이터만 연결합니다. 존재하지 않거나 비공개인 Workflow와 Resource는 화면에 표시하지 않습니다. 모든 적용 사례와 수치는 가상 또는 일반화된 정보만 사용합니다.
 
 ## Update Log 데이터 모델
 

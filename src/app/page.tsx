@@ -2,6 +2,7 @@ import { BookResourcesSection } from "@/components/home/BookResourcesSection";
 import { HomeIntro } from "@/components/home/HomeIntro";
 import { HomeSearchSection } from "@/components/home/HomeSearchSection";
 import { PrivacyNotice } from "@/components/home/PrivacyNotice";
+import { ProjectCaseSection } from "@/components/home/ProjectCaseSection";
 import { RecentUpdates } from "@/components/home/RecentUpdates";
 import { WorkCategoryGrid } from "@/components/home/WorkCategoryGrid";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -17,6 +18,7 @@ export default function Home() {
           <HomeSearchSection />
           <WorkCategoryGrid />
           <BookResourcesSection />
+          <ProjectCaseSection />
           <RecentUpdates />
           <PrivacyNotice />
         </div>
