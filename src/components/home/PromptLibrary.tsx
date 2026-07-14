@@ -16,6 +16,7 @@ export function PromptLibrary() {
         const searchableText = [
           item.title,
           item.description,
+          item.chapter,
           item.tool,
           item.category,
           item.content,
@@ -151,7 +152,7 @@ function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
     <article className="flex flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-6">
       <div className="flex flex-wrap gap-2">
         <span className="rounded-full bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-action-primary)]">
-          프롬프트
+          {item.chapter}
         </span>
         <span className="rounded-full bg-[var(--color-surface-muted)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)]">
           {item.tool}
