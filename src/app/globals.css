@@ -2,7 +2,7 @@
 
 :root {
   --color-brand-primary: #183b66;
-  --color-brand-hover: #102d4f;
+  --color-brand-hover: #102f55;
   --color-brand-secondary: #4a90e2;
   --color-surface-primary: #ffffff;
   --color-surface-subtle: #f8fafc;
@@ -11,11 +11,11 @@
   --color-text-primary: #183b66;
   --color-text-secondary: #526579;
   --color-text-tertiary: #7b8797;
-  --color-border-default: #d7e0ea;
+  --color-border-default: #d7e3f0;
   --color-border-subtle: #e7edf4;
   --color-action-primary: #4a90e2;
   --color-action-hover: #2f73c8;
-  --color-action-muted: #edf6ff;
+  --color-action-muted: #eef5fc;
   --color-status-success: #168a4a;
   --color-status-success-hover: #0f6f3a;
   --color-status-success-muted: #eaf7ef;

@@ -1,13 +1,36 @@
 "use client";
 
-import { BookOpen, Search, X } from "lucide-react";
+import { BookOpen, ChevronDown, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { CopyResourceButton } from "@/components/resources/CopyResourceButton";
 import { PROMPT_CATEGORIES, promptLibraryItems, type PromptCategory, type PromptLibraryItem } from "@/data/promptLibrary";
 
 type PromptChapterGroup = {
   readonly chapter: string;
+  readonly title: string;
   readonly items: readonly PromptLibraryItem[];
+};
+
+const CHAPTER_TITLES: Readonly<Record<string, string>> = {
+  "Chapter 1": "보건업무 자동화는 문제 발견에서 시작된다",
+  "Chapter 2": "안내문은 한 번 만들고 계속 다듬는다",
+  "Chapter 3": "AI로 반복 문서 업무를 구조화한다",
+  "Chapter 4": "업무 포털은 메뉴 구조에서 시작된다",
+  "Chapter 5": "AI에게 안전하게 작업을 지시한다",
+  "Chapter 6": "Workflow로 업무 흐름을 설계한다",
+  "Chapter 7": "연수 자료를 AI와 함께 설계한다",
+  "Chapter 8": "Toolchain으로 제작 환경을 정리한다",
+  "Chapter 9": "긴 프로젝트를 끊기지 않게 이어간다",
+  "실전 부록 1": "반복 업무 구조화",
+  "실전 부록 2": "교직원 메신저 안내",
+  "실전 부록 3": "공문·보고서 초안",
+  "실전 부록 4": "반복 보건업무 목록화",
+  "실전 부록 5": "Google Sheets 설계",
+  "실전 부록 6": "TSV 더미 데이터",
+  "실전 부록 7": "Apps Script 작성",
+  "실전 부록 8": "오류 원인 분석",
+  "실전 부록 9": "교육자료 설계",
+  "실전 부록 10": "긴 프로젝트 이어가기",
 };
 
 const getChapterOrder = (chapter: string): number => {
@@ -16,14 +39,18 @@ const getChapterOrder = (chapter: string): number => {
   return chapter.startsWith("Chapter") ? chapterNumber : 100 + chapterNumber;
 };
 
+const getChapterTitle = (chapter: string): string => CHAPTER_TITLES[chapter] ?? "전자책 실전 프롬프트";
+
 export function PromptLibrary() {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<PromptCategory>("전체");
+  const [category, setCategory] = useState<PromptCategory>(PROMPT_CATEGORIES[0]);
+  const [openChapters, setOpenChapters] = useState<readonly string[]>(["Chapter 1"]);
   const normalizedQuery = query.trim().toLocaleLowerCase("ko-KR");
+  const hasActiveFilters = normalizedQuery.length > 0 || category !== PROMPT_CATEGORIES[0];
   const visibleItems = useMemo(
     () =>
       promptLibraryItems.filter((item) => {
-        const matchesCategory = category === "전체" || item.category === category;
+        const matchesCategory = category === PROMPT_CATEGORIES[0] || item.category === category;
         const searchableText = [
           item.title,
           item.description,
@@ -47,10 +74,15 @@ export function PromptLibrary() {
       groups.set(item.chapter, [...chapterItems, item]);
     }
 
-    return [...groups.entries()]
-      .map(([chapter, items]) => ({ chapter, items }))
-      .toSorted((left, right) => getChapterOrder(left.chapter) - getChapterOrder(right.chapter));
+    return [...groups.entries()].map(([chapter, items]) => ({ chapter, title: getChapterTitle(chapter), items })).toSorted((left, right) => getChapterOrder(left.chapter) - getChapterOrder(right.chapter));
   }, [visibleItems]);
+  const expandedChapters = hasActiveFilters ? visibleChapterGroups.map((group) => group.chapter) : openChapters;
+
+  const toggleChapter = (chapter: string) => {
+    setOpenChapters((current) =>
+      current.includes(chapter) ? current.filter((item) => item !== chapter) : [...current, chapter],
+    );
+  };
 
   return (
     <main className="min-h-dvh bg-[var(--color-surface-subtle)] text-[var(--color-text-primary)]">
@@ -100,7 +132,7 @@ export function PromptLibrary() {
                   type="search"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder="프롬프트 제목, 도구 또는 내용을 검색하세요"
+                  placeholder="프롬프트 제목, 도구 또는 내용을 검색해보세요"
                   className="min-h-12 w-full bg-transparent text-base outline-none placeholder:text-[var(--color-text-tertiary)]"
                 />
                 {query ? (
@@ -128,7 +160,7 @@ export function PromptLibrary() {
                       className={`min-h-10 rounded-full px-3.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] ${
                         isSelected
                           ? "bg-[var(--color-brand-primary)] text-white"
-                          : "bg-[var(--color-surface-muted)] text-[var(--color-text-secondary)] hover:bg-[var(--color-action-muted)] hover:text-[var(--color-action-primary)]"
+                          : "border border-[var(--color-border-default)] bg-[var(--color-action-muted)] text-[var(--color-brand-primary)] hover:bg-[var(--color-surface-blue)]"
                       }`}
                     >
                       {item}
@@ -149,24 +181,21 @@ export function PromptLibrary() {
               </div>
 
               {visibleItems.length > 0 ? (
-                <div className="mt-4 grid gap-7">
-                  {visibleChapterGroups.map((group) => {
-                    const headingId = `prompt-${group.chapter.replaceAll(" ", "-")}`;
+                <div className="mt-4 grid gap-3">
+                  {visibleChapterGroups.map((group, index) => {
+                    const isExpanded = expandedChapters.includes(group.chapter);
+                    const panelId = `chapter-panel-${index}`;
+                    const buttonId = `chapter-button-${index}`;
 
                     return (
-                      <section key={group.chapter} aria-labelledby={headingId}>
-                        <div className="mb-3 flex items-center gap-2 text-[var(--color-brand-primary)]">
-                          <BookOpen aria-hidden="true" size={16} />
-                          <h3 id={headingId} className="text-sm font-semibold">
-                            {group.chapter}
-                          </h3>
-                        </div>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {group.items.map((item) => (
-                            <PromptCard key={item.id} item={item} />
-                          ))}
-                        </div>
-                      </section>
+                      <ChapterAccordion
+                        key={group.chapter}
+                        buttonId={buttonId}
+                        group={group}
+                        isExpanded={isExpanded}
+                        panelId={panelId}
+                        onToggle={() => toggleChapter(group.chapter)}
+                      />
                     );
                   })}
                 </div>
@@ -183,14 +212,50 @@ export function PromptLibrary() {
   );
 }
 
+function ChapterAccordion({ buttonId, group, isExpanded, onToggle, panelId }: { readonly buttonId: string; readonly group: PromptChapterGroup; readonly isExpanded: boolean; readonly onToggle: () => void; readonly panelId: string }) {
+  return (
+    <section className="rounded-[20px] border border-[var(--color-border-subtle)] bg-white shadow-[var(--shadow-card)]" aria-labelledby={buttonId}>
+      <button
+        id={buttonId}
+        type="button"
+        aria-controls={panelId}
+        aria-expanded={isExpanded}
+        onClick={onToggle}
+        className="flex min-h-[52px] w-full items-center gap-3 rounded-[20px] px-4 py-3 text-left transition-colors hover:bg-[var(--color-action-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] sm:px-5"
+      >
+        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-border-default)] bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand-primary)]">
+          <BookOpen aria-hidden="true" size={14} />
+          {group.chapter}
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-semibold leading-5 text-[var(--color-brand-primary)] sm:text-base">{group.title}</span>
+          <span className="mt-0.5 block text-xs font-medium text-[var(--color-text-secondary)]">프롬프트 {group.items.length}개</span>
+        </span>
+        <ChevronDown aria-hidden="true" className={`size-5 shrink-0 text-[var(--color-brand-primary)] transition-transform duration-150 ease-out ${isExpanded ? "rotate-180" : ""}`} />
+      </button>
+
+      <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!isExpanded}>
+        {isExpanded && (
+          <div className="overflow-hidden">
+            <div className="grid gap-4 px-4 pb-4 pt-1 md:grid-cols-2 sm:px-5 sm:pb-5">
+              {group.items.map((item) => (
+                <PromptCard key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
-  const content = item.content;
-  const preview = content.replace(/\s+/g, " ").trim().slice(0, 180);
+  const preview = item.content.replace(/\s+/g, " ").trim().slice(0, 180);
 
   return (
     <article className="flex flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-4 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-5">
       <div className="flex flex-wrap gap-2">
-        <span className="rounded-full bg-[var(--color-surface-muted)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)]">
+        <span className="rounded-full border border-[var(--color-border-default)] bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand-primary)]">
           {item.tool}
         </span>
       </div>
@@ -203,11 +268,11 @@ function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2">
-        <span className="text-xs text-[var(--color-text-tertiary)]">#{item.category}</span>
+        <span className="rounded-full bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand-primary)]">#{item.category}</span>
       </div>
 
       <div className="pt-4">
-        <CopyResourceButton text={content} idleLabel="프롬프트 복사" className="w-full" />
+        <CopyResourceButton text={item.content} idleLabel="프롬프트 복사" className="w-full" />
       </div>
     </article>
   );

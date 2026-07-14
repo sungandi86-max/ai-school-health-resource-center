@@ -66,7 +66,7 @@ export function CopyResourceButton({ text, idleLabel = "전체 복사", classNam
   return (
     <button
       type="button"
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[var(--color-status-success)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-status-success-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-status-success)] ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[var(--color-brand-primary)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-brand-hover)] disabled:bg-[var(--color-surface-blue)] disabled:text-[var(--color-text-tertiary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] ${className}`}
       onClick={copyText}
     >
       <Icon aria-hidden="true" size={17} />
