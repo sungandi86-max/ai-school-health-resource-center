@@ -1,9 +1,20 @@
 "use client";
 
-import { Search, X } from "lucide-react";
+import { BookOpen, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { CopyResourceButton } from "@/components/resources/CopyResourceButton";
 import { PROMPT_CATEGORIES, promptLibraryItems, type PromptCategory, type PromptLibraryItem } from "@/data/promptLibrary";
+
+type PromptChapterGroup = {
+  readonly chapter: string;
+  readonly items: readonly PromptLibraryItem[];
+};
+
+const getChapterOrder = (chapter: string): number => {
+  const chapterNumber = Number(chapter.match(/\d+$/)?.[0] ?? Number.MAX_SAFE_INTEGER);
+
+  return chapter.startsWith("Chapter") ? chapterNumber : 100 + chapterNumber;
+};
 
 export function PromptLibrary() {
   const [query, setQuery] = useState("");
@@ -28,20 +39,32 @@ export function PromptLibrary() {
       }),
     [category, normalizedQuery],
   );
+  const visibleChapterGroups = useMemo<readonly PromptChapterGroup[]>(() => {
+    const groups = new Map<string, PromptLibraryItem[]>();
+
+    for (const item of visibleItems) {
+      const chapterItems = groups.get(item.chapter) ?? [];
+      groups.set(item.chapter, [...chapterItems, item]);
+    }
+
+    return [...groups.entries()]
+      .map(([chapter, items]) => ({ chapter, items }))
+      .toSorted((left, right) => getChapterOrder(left.chapter) - getChapterOrder(right.chapter));
+  }, [visibleItems]);
 
   return (
     <main className="min-h-dvh bg-[var(--color-surface-subtle)] text-[var(--color-text-primary)]">
-      <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-8 sm:px-8 sm:pt-12">
+      <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-6 sm:px-8 sm:pt-8">
         <section className="max-w-3xl" aria-labelledby="prompt-library-title">
           <p className="w-fit rounded-full bg-[var(--color-action-muted)] px-3 py-1.5 text-xs font-semibold text-[var(--color-brand-primary)] ring-1 ring-[var(--color-border-subtle)]">
-            『보건교사를 위한 AI 업무 자동화』 공식 자료
+            『보건교사를 위한 AI 업무 자동화』 공식 프롬프트 자료
           </p>
-          <h1 id="prompt-library-title" className="mt-5 text-[2rem] font-semibold leading-[1.16] tracking-[-0.025em] sm:text-[2.75rem]">
+          <h1 id="prompt-library-title" className="mt-3 text-[2rem] font-semibold leading-[1.16] tracking-[-0.025em] sm:text-[2.75rem]">
             책과 함께 사용하는
             <br />
             실전 프롬프트 자료실
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
+          <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
             『보건교사를 위한 AI 업무 자동화』에서 사용하는 최신 프롬프트를 찾아 바로 복사할 수 있습니다.
           </p>
         </section>
@@ -54,7 +77,7 @@ export function PromptLibrary() {
           </section>
         ) : (
           <>
-            <section id="prompts" className="mt-8 scroll-mt-20 rounded-[20px] bg-white p-4 shadow-[var(--shadow-card)] sm:mt-10 sm:p-5" aria-labelledby="prompt-search-title">
+            <section id="prompts" className="mt-6 scroll-mt-20 rounded-[20px] bg-white p-4 shadow-[var(--shadow-card)] sm:mt-8 sm:p-5" aria-labelledby="prompt-search-title">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <h2 id="prompt-search-title" className="text-lg font-semibold text-[var(--color-brand-primary)]">
@@ -126,10 +149,26 @@ export function PromptLibrary() {
               </div>
 
               {visibleItems.length > 0 ? (
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  {visibleItems.map((item) => (
-                    <PromptCard key={item.id} item={item} />
-                  ))}
+                <div className="mt-4 grid gap-7">
+                  {visibleChapterGroups.map((group) => {
+                    const headingId = `prompt-${group.chapter.replaceAll(" ", "-")}`;
+
+                    return (
+                      <section key={group.chapter} aria-labelledby={headingId}>
+                        <div className="mb-3 flex items-center gap-2 text-[var(--color-brand-primary)]">
+                          <BookOpen aria-hidden="true" size={16} />
+                          <h3 id={headingId} className="text-sm font-semibold">
+                            {group.chapter}
+                          </h3>
+                        </div>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          {group.items.map((item) => (
+                            <PromptCard key={item.id} item={item} />
+                          ))}
+                        </div>
+                      </section>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="mt-4 rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-6 text-sm leading-6 text-[var(--color-text-secondary)]">
@@ -149,28 +188,25 @@ function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
   const preview = content.replace(/\s+/g, " ").trim().slice(0, 180);
 
   return (
-    <article className="flex flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-6">
+    <article className="flex flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-4 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-5">
       <div className="flex flex-wrap gap-2">
-        <span className="rounded-full bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-action-primary)]">
-          {item.chapter}
-        </span>
         <span className="rounded-full bg-[var(--color-surface-muted)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)]">
           {item.tool}
         </span>
       </div>
-      <h3 className="mt-4 text-lg font-semibold leading-snug text-[var(--color-brand-primary)]">{item.title}</h3>
+      <h4 className="mt-3 text-lg font-semibold leading-snug text-[var(--color-brand-primary)]">{item.title}</h4>
       <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">{item.description}</p>
 
-      <div className="mt-4 rounded-2xl bg-[var(--color-surface-muted)] p-4">
+      <div className="mt-3 rounded-2xl bg-[var(--color-surface-muted)] p-3">
         <p className="text-xs font-semibold text-[var(--color-text-tertiary)]">프롬프트 미리보기</p>
-        <p className="mt-2 line-clamp-4 text-sm leading-6 text-[var(--color-text-secondary)]">{preview}...</p>
+        <p className="mt-1.5 line-clamp-4 overflow-hidden text-sm leading-5 text-[var(--color-text-secondary)]">{preview}...</p>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-2">
         <span className="text-xs text-[var(--color-text-tertiary)]">#{item.category}</span>
       </div>
 
-      <div className="pt-5">
+      <div className="pt-4">
         <CopyResourceButton text={content} idleLabel="프롬프트 복사" className="w-full" />
       </div>
     </article>

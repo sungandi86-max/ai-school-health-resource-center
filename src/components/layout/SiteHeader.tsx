@@ -11,7 +11,7 @@ export function SiteHeader() {
           href="/"
           className="grid min-h-12 shrink-0 content-center whitespace-nowrap text-sm font-semibold leading-tight text-[var(--color-brand-primary)] outline-none transition-colors hover:text-[var(--color-action-primary)] focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] sm:text-base"
         >
-          <span>AI School Health Resource Center</span>
+          <span>Book Prompt Library</span>
         </Link>
 
         <nav className="hidden items-center gap-1 sm:flex" aria-label="주요 메뉴">

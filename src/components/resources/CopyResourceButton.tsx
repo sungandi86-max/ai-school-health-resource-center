@@ -13,7 +13,7 @@ type CopyResourceButtonProps = {
 
 const buttonLabel = (status: CopyStatus, idleLabel: string): string => {
   if (status === "success") {
-    return "복사했습니다";
+    return "복사되었습니다";
   }
 
   if (status === "error") {
