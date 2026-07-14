@@ -1,15 +1,10 @@
 "use client";
 
-import { BookOpen, ChevronDown, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
-import { CopyResourceButton } from "@/components/resources/CopyResourceButton";
+import { AdditionalResources } from "@/components/home/AdditionalResources";
+import { ChapterAccordion, type PromptChapterGroup } from "@/components/home/PromptLibraryCards";
 import { PROMPT_CATEGORIES, promptLibraryItems, type PromptCategory, type PromptLibraryItem } from "@/data/promptLibrary";
-
-type PromptChapterGroup = {
-  readonly chapter: string;
-  readonly title: string;
-  readonly items: readonly PromptLibraryItem[];
-};
 
 const CHAPTER_TITLES: Readonly<Record<string, string>> = {
   "Chapter 1": "보건업무 자동화는 문제 발견에서 시작된다",
@@ -89,16 +84,19 @@ export function PromptLibrary() {
       <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-6 sm:px-8 sm:pt-8">
         <section className="max-w-3xl" aria-labelledby="prompt-library-title">
           <p className="w-fit rounded-full bg-[var(--color-action-muted)] px-3 py-1.5 text-xs font-semibold text-[var(--color-brand-primary)] ring-1 ring-[var(--color-border-subtle)]">
-            『보건교사를 위한 AI 업무 자동화』 공식 프롬프트 자료
+            『보건교사를 위한 AI 업무 자동화』 전자책 부록
           </p>
           <h1 id="prompt-library-title" className="mt-3 text-[2rem] font-semibold leading-[1.16] tracking-[-0.025em] sm:text-[2.75rem]">
-            책과 함께 사용하는
+            전자책 부록
             <br />
-            실전 프롬프트 자료실
+            실전 프롬프트 & 추가 자료
           </h1>
-          <p className="mt-3 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
-            『보건교사를 위한 AI 업무 자동화』에서 사용하는 최신 프롬프트를 찾아 바로 복사할 수 있습니다.
-          </p>
+          <div className="mt-3 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
+            <p>『보건교사를 위한 AI 업무 자동화』 전자책에서 사용하는 실전 자료를 다운로드하거나 바로 복사하여 사용할 수 있습니다.</p>
+            <p className="mt-2 text-sm leading-6 sm:text-base">
+              실전 프롬프트, 템플릿, 실습 자료, 업데이트 자료는 책 출간 이후에도 이 페이지를 통해 계속 업데이트됩니다.
+            </p>
+          </div>
         </section>
 
         {promptLibraryItems.length === 0 ? (
@@ -113,9 +111,9 @@ export function PromptLibrary() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <h2 id="prompt-search-title" className="text-lg font-semibold text-[var(--color-brand-primary)]">
-                    프롬프트 찾기
+                    부록 자료 찾기
                   </h2>
-                  <p className="mt-1 text-sm text-[var(--color-text-secondary)]">제목, 설명, 도구, 주제와 프롬프트 본문을 검색합니다.</p>
+                  <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Chapter, 제목, 도구, 주제와 프롬프트 본문을 검색합니다.</p>
                 </div>
                 <span className="shrink-0 text-sm font-semibold text-[var(--color-text-secondary)]" aria-live="polite">
                   {visibleItems.length}개
@@ -125,20 +123,20 @@ export function PromptLibrary() {
               <div className="mt-4 flex min-h-14 items-center gap-2 rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-surface-subtle)] px-4 focus-within:border-[var(--color-action-primary)] focus-within:ring-2 focus-within:ring-[var(--color-focus-ring)]">
                 <Search aria-hidden="true" className="size-5 shrink-0 text-[var(--color-action-primary)]" />
                 <label className="sr-only" htmlFor="prompt-search">
-                  프롬프트 검색
+                  부록 자료 검색
                 </label>
                 <input
                   id="prompt-search"
                   type="search"
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
-                  placeholder="프롬프트 제목, 도구 또는 내용을 검색해보세요"
+                  placeholder="Chapter, 제목, 도구 또는 내용을 검색해보세요"
                   className="min-h-12 w-full bg-transparent text-base outline-none placeholder:text-[var(--color-text-tertiary)]"
                 />
                 {query ? (
                   <button
                     type="button"
-                    aria-label="프롬프트 검색어 지우기"
+                    aria-label="부록 자료 검색어 지우기"
                     onClick={() => setQuery("")}
                     className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-xl text-[var(--color-text-secondary)] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
                   >
@@ -147,7 +145,7 @@ export function PromptLibrary() {
                 ) : null}
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="프롬프트 카테고리">
+              <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="부록 자료 카테고리">
                 {PROMPT_CATEGORIES.map((item) => {
                   const isSelected = item === category;
 
@@ -174,9 +172,9 @@ export function PromptLibrary() {
               <div className="flex items-end justify-between gap-4">
                 <div>
                   <h2 id="prompt-list-title" className="text-xl font-semibold text-[var(--color-brand-primary)]">
-                    실전 프롬프트
+                    Chapter별 실전 프롬프트
                   </h2>
-                  <p className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)]">필요한 프롬프트를 복사해 바로 사용하세요.</p>
+                  <p className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)]">책의 흐름에 맞춰 필요한 프롬프트를 복사해 바로 사용하세요.</p>
                 </div>
               </div>
 
@@ -201,79 +199,14 @@ export function PromptLibrary() {
                 </div>
               ) : (
                 <div className="mt-4 rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-6 text-sm leading-6 text-[var(--color-text-secondary)]">
-                  조건에 맞는 프롬프트가 없습니다. 검색어 또는 카테고리를 변경해보세요.
+                  조건에 맞는 자료가 없습니다. 검색어 또는 카테고리를 변경해보세요.
                 </div>
               )}
             </section>
+            <AdditionalResources />
           </>
         )}
       </div>
     </main>
-  );
-}
-
-function ChapterAccordion({ buttonId, group, isExpanded, onToggle, panelId }: { readonly buttonId: string; readonly group: PromptChapterGroup; readonly isExpanded: boolean; readonly onToggle: () => void; readonly panelId: string }) {
-  return (
-    <section className="rounded-[20px] border border-[var(--color-border-subtle)] bg-white shadow-[var(--shadow-card)]" aria-labelledby={buttonId}>
-      <button
-        id={buttonId}
-        type="button"
-        aria-controls={panelId}
-        aria-expanded={isExpanded}
-        onClick={onToggle}
-        className="flex min-h-[52px] w-full items-center gap-3 rounded-[20px] px-4 py-3 text-left transition-colors hover:bg-[var(--color-action-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] sm:px-5"
-      >
-        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-border-default)] bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand-primary)]">
-          <BookOpen aria-hidden="true" size={14} />
-          {group.chapter}
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-sm font-semibold leading-5 text-[var(--color-brand-primary)] sm:text-base">{group.title}</span>
-          <span className="mt-0.5 block text-xs font-medium text-[var(--color-text-secondary)]">프롬프트 {group.items.length}개</span>
-        </span>
-        <ChevronDown aria-hidden="true" className={`size-5 shrink-0 text-[var(--color-brand-primary)] transition-transform duration-150 ease-out ${isExpanded ? "rotate-180" : ""}`} />
-      </button>
-
-      <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!isExpanded}>
-        {isExpanded && (
-          <div className="overflow-hidden">
-            <div className="grid gap-4 px-4 pb-4 pt-1 md:grid-cols-2 sm:px-5 sm:pb-5">
-              {group.items.map((item) => (
-                <PromptCard key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function PromptCard({ item }: { readonly item: PromptLibraryItem }) {
-  const preview = item.content.replace(/\s+/g, " ").trim().slice(0, 180);
-
-  return (
-    <article className="flex flex-col rounded-[20px] border border-[var(--color-border-subtle)] bg-white p-4 shadow-[var(--shadow-card)] transition hover:border-[var(--color-brand-secondary)] hover:shadow-[var(--shadow-card-hover)] sm:p-5">
-      <div className="flex flex-wrap gap-2">
-        <span className="rounded-full border border-[var(--color-border-default)] bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand-primary)]">
-          {item.tool}
-        </span>
-      </div>
-      <h4 className="mt-3 text-lg font-semibold leading-snug text-[var(--color-brand-primary)]">{item.title}</h4>
-      <p className="mt-2 text-sm leading-6 text-[var(--color-text-secondary)]">{item.description}</p>
-
-      <div className="mt-3 rounded-2xl bg-[var(--color-surface-muted)] p-3">
-        <p className="text-xs font-semibold text-[var(--color-text-tertiary)]">프롬프트 미리보기</p>
-        <p className="mt-1.5 line-clamp-4 overflow-hidden text-sm leading-5 text-[var(--color-text-secondary)]">{preview}...</p>
-      </div>
-
-      <div className="mt-3 flex flex-wrap gap-2">
-        <span className="rounded-full bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-brand-primary)]">#{item.category}</span>
-      </div>
-
-      <div className="pt-4">
-        <CopyResourceButton text={item.content} idleLabel="프롬프트 복사" className="w-full" />
-      </div>
-    </article>
   );
 }

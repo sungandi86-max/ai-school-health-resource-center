@@ -2,11 +2,12 @@ import promptsJson from "@/data/prompts.json";
 
 export const PROMPT_CATEGORIES = [
   "전체",
-  "ChatGPT",
-  "Claude Code",
+  "온라인 보건실",
+  "School Health Hub",
   "업무 자동화",
-  "글쓰기",
-  "프로젝트 개발",
+  "AI 활용",
+  "전자책 제작",
+  "부록",
 ] as const;
 
 export type PromptCategory = (typeof PROMPT_CATEGORIES)[number];
@@ -31,11 +32,12 @@ class InvalidPromptCategoryError extends Error {
 
 const parsePromptCategory = (category: string): PromptDataCategory => {
   switch (category) {
-    case "ChatGPT":
-    case "Claude Code":
+    case "온라인 보건실":
+    case "School Health Hub":
     case "업무 자동화":
-    case "글쓰기":
-    case "프로젝트 개발":
+    case "AI 활용":
+    case "전자책 제작":
+    case "부록":
       return category;
     default:
       throw new InvalidPromptCategoryError(category);

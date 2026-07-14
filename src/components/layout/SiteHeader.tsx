@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import Link from "next/link";
 
-const navigationItems = [{ label: "프롬프트", href: "/#prompts" }] as const;
+const navigationItems = [{ label: "부록 자료", href: "/#prompts" }] as const;
 
 export function SiteHeader() {
   return (
@@ -11,7 +11,7 @@ export function SiteHeader() {
           href="/"
           className="grid min-h-12 shrink-0 content-center whitespace-nowrap text-sm font-semibold leading-tight text-[var(--color-brand-primary)] outline-none transition-colors hover:text-[var(--color-action-primary)] focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)] sm:text-base"
         >
-          <span>Book Prompt Library</span>
+          <span>전자책 부록</span>
         </Link>
 
         <nav className="hidden items-center gap-1 sm:flex" aria-label="주요 메뉴">
@@ -27,7 +27,7 @@ export function SiteHeader() {
           <Link
             href="/#prompts"
             className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
-            aria-label="프롬프트 검색으로 이동"
+            aria-label="부록 자료 검색으로 이동"
           >
             <Search aria-hidden="true" size={18} />
           </Link>

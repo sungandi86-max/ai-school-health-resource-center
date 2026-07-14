@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "실전 프롬프트 자료실 | Book Prompt Library",
-  description: "『보건교사를 위한 AI 업무 자동화』에서 사용하는 최신 프롬프트를 찾아 복사하세요.",
+  title: "전자책 공식 자료실 | 보건교사를 위한 AI 업무 자동화",
+  description: "『보건교사를 위한 AI 업무 자동화』 전자책의 실전 프롬프트, 템플릿, 실습 자료, 업데이트 자료를 확인하세요.",
 };
 
 export default function RootLayout({

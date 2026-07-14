@@ -23,6 +23,30 @@ const buttonLabel = (status: CopyStatus, idleLabel: string): string => {
   return idleLabel;
 };
 
+const copyWithTextarea = (text: string): boolean => {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.inset = "0";
+  textarea.style.opacity = "0";
+  document.body.append(textarea);
+  textarea.select();
+  textarea.setSelectionRange(0, text.length);
+
+  try {
+    return document.execCommand("copy");
+  } catch (error) {
+    if (error instanceof Error) {
+      return false;
+    }
+
+    throw error;
+  } finally {
+    textarea.remove();
+  }
+};
+
 export function CopyResourceButton({ text, idleLabel = "전체 복사", className = "" }: CopyResourceButtonProps) {
   const [status, setStatus] = useState<CopyStatus>("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -48,17 +72,18 @@ export function CopyResourceButton({ text, idleLabel = "전체 복사", classNam
   };
 
   const copyText = async () => {
-    if (!navigator.clipboard) {
-      setStatus("error");
+    if (navigator.clipboard) {
+      const isCopied = await navigator.clipboard.writeText(text).then(
+        () => true,
+        () => copyWithTextarea(text),
+      );
+
+      setStatus(isCopied ? "success" : "error");
       resetSoon();
       return;
     }
 
-    const isCopied = await navigator.clipboard.writeText(text).then(
-      () => true,
-      () => false,
-    );
-
+    const isCopied = copyWithTextarea(text);
     setStatus(isCopied ? "success" : "error");
     resetSoon();
   };
