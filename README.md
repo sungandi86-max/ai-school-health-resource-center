@@ -67,7 +67,7 @@
 | 2 | [BOOK_STYLE.md](BOOK_STYLE.md) | 책 전체의 편집·시각 스타일 | 작성 완료 |
 | 3 | [WRITING_STYLE.md](WRITING_STYLE.md) | 문장, 어조, 서술 방식 | 작성 완료 |
 | 4 | [BOOK_STRUCTURE.md](BOOK_STRUCTURE.md) | PART와 Chapter의 전체 구조 | 작성 완료 |
-| 5 | [PART_TEMPLATE.md](PART_TEMPLATE.md) | PART 반복 구조 | 작성 예정 |
+| 5 | [PART_TEMPLATE.md](PART_TEMPLATE.md) | PART 반복 구조 | 작성 완료 |
 | 6 | [CHAPTER_TEMPLATE.md](CHAPTER_TEMPLATE.md) | Chapter 반복 구조 | 작성 예정 |
 | 7 | [PROJECTBOOK_RULES.md](PROJECTBOOK_RULES.md) | 프로젝트북으로 작동하는 규칙 | 작성 예정 |
 | 8 | [CASE_GUIDE.md](CASE_GUIDE.md) | 사례 제시 방식 | 작성 예정 |
