@@ -4,8 +4,9 @@ import type { ComponentType } from "react";
 const additionalResources = [
   {
     title: "Google Sheets 템플릿",
-    description: "책의 실습 흐름에 맞춰 학생·교직원 데이터를 정리할 때 사용할 시트 구조 예시입니다.",
-    status: "업데이트 예정",
+    description: "책의 PART 1~8 실습을 하나의 프로젝트 파일로 이어서 작성하는 통합 시트입니다.",
+    href: "https://docs.google.com/spreadsheets/d/1mZh-QK7SuAKVLTAAt1AoiJVaTZEZkXPTeA5QlyF7wwg/copy",
+    status: "사본 만들기",
     icon: FileSpreadsheet,
   },
   {
@@ -69,10 +70,14 @@ function AdditionalResourceCard({ resource }: { readonly resource: AdditionalRes
   const content = <AdditionalResourceCardContent icon={Icon} resource={resource} />;
 
   if ("href" in resource) {
+    const isExternalLink = resource.href.startsWith("http");
+
     return (
       <a
         href={resource.href}
-        download
+        download={isExternalLink ? undefined : true}
+        rel={isExternalLink ? "noreferrer" : undefined}
+        target={isExternalLink ? "_blank" : undefined}
         className="rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface-subtle)] p-4 transition hover:border-[var(--color-brand-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
       >
         {content}

@@ -82,19 +82,17 @@ export function PromptLibrary() {
   return (
     <main className="min-h-dvh bg-[var(--color-surface-subtle)] text-[var(--color-text-primary)]">
       <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-6 sm:px-8 sm:pt-8">
-        <section className="max-w-3xl" aria-labelledby="prompt-library-title">
+        <section className="max-w-4xl" aria-labelledby="prompt-library-title">
           <p className="w-fit rounded-full bg-[var(--color-action-muted)] px-3 py-1.5 text-xs font-semibold text-[var(--color-brand-primary)] ring-1 ring-[var(--color-border-subtle)]">
             『보건교사를 위한 AI 업무 자동화』 전자책 부록
           </p>
-          <h1 id="prompt-library-title" className="mt-3 text-[2rem] font-semibold leading-[1.16] tracking-[-0.025em] sm:text-[2.75rem]">
-            전자책 부록
-            <br />
-            실전 프롬프트 & 추가 자료
+          <h1 id="prompt-library-title" className="mt-3 text-[2rem] font-semibold leading-[1.16] tracking-[-0.025em] sm:text-[2.65rem]">
+            전자책 부록 자료실
           </h1>
-          <div className="mt-3 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
-            <p>『보건교사를 위한 AI 업무 자동화』 전자책에서 사용하는 실전 자료를 다운로드하거나 바로 복사하여 사용할 수 있습니다.</p>
+          <div className="mt-3 max-w-3xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
+            <p>책에서 사용하는 실전 프롬프트와 추가 자료를 PART별로 내려받거나 바로 복사해 사용할 수 있습니다.</p>
             <p className="mt-2 text-sm leading-6 sm:text-base">
-              실전 프롬프트, 템플릿, 실습 자료, 업데이트 자료는 책 출간 이후에도 이 페이지를 통해 계속 업데이트됩니다.
+              Google Sheets 템플릿, 실습 파일, 업데이트 자료도 출간 이후 이 페이지에서 계속 연결합니다.
             </p>
           </div>
         </section>
