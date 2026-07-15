@@ -1,12 +1,8 @@
-import { ArrowRight, Download, FileText, QrCode } from "lucide-react";
+import { ArrowRight, Download, QrCode } from "lucide-react";
 import Link from "next/link";
-import { bookParts, bookPartSummary, type BookResource } from "@/data/bookParts";
-
-const resourceLabels: Record<BookResource["kind"], string> = {
-  prompt: "프롬프트",
-  worksheet: "실습자료",
-  project: "프로젝트 파일",
-};
+import { PromptResourceButton } from "@/components/home/PromptResourceButton";
+import { bookParts, bookPartSummary } from "@/data/bookParts";
+import { fullProjectResource, type BookResource } from "@/data/bookResources";
 
 export function PartResourceHub() {
   return (
@@ -50,6 +46,13 @@ export function PartResourceHub() {
               <li>3. 실습자료를 내려받아 작성합니다.</li>
               <li>4. 작성한 프로젝트 파일을 다음 PART에서도 이어 사용합니다.</li>
             </ol>
+            <div className="mt-5">
+              <DownloadResourceLink
+                resource={fullProjectResource}
+                label="전체 프로젝트 파일"
+                variant="dark"
+              />
+            </div>
           </aside>
         </div>
       </section>
@@ -58,7 +61,7 @@ export function PartResourceHub() {
         <SummaryCard value={`${bookPartSummary.partCount}`} label="PART" />
         <SummaryCard value={`${bookPartSummary.chapterCount}`} label="Chapter" />
         <SummaryCard value="22" label="실습 흐름" />
-        <SummaryCard value="3" label={bookPartSummary.resourceKinds.join(" · ")} />
+        <SummaryCard value="4" label={bookPartSummary.resourceKinds.join(" · ")} />
       </section>
 
       <section className="mx-auto grid w-full max-w-[1180px] gap-5 px-5 py-10 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:py-14">
@@ -98,6 +101,12 @@ export function PartResourceHub() {
                 {part.chapters.length} Chapters
               </span>
             </header>
+            <div className="border-b border-[var(--color-border-subtle)] bg-white p-5 sm:p-6">
+              <DownloadResourceLink
+                resource={part.projectResource}
+                label={`PART ${part.number} 프로젝트 파일`}
+              />
+            </div>
             <div className="grid gap-px bg-[var(--color-border-subtle)] lg:grid-cols-3">
               {part.chapters.map((chapter) => (
                 <section key={chapter.number} className="grid content-start gap-4 bg-white p-5">
@@ -122,7 +131,7 @@ export function PartResourceHub() {
                   </p>
                   <div className="grid gap-2">
                     {chapter.resources.map((resource) => (
-                      <ResourceLink key={`${chapter.number}-${resource.kind}`} resource={resource} />
+                      <ResourceLink key={resource.id} resource={resource} />
                     ))}
                   </div>
                 </section>
@@ -163,7 +172,7 @@ export function PartResourceHub() {
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <ReleaseItem title="정보구조" text="PART 1~8, Chapter 01~22 반영" />
             <ReleaseItem title="데이터 구조" text="PART, Chapter, Resource 단위 분리" />
-            <ReleaseItem title="링크 정책" text="실제 자료 업로드 후 href만 교체" />
+            <ReleaseItem title="자료 연결" text="프롬프트, 실습자료, 프로젝트 파일 연결" />
             <ReleaseItem title="독자 안내" text="자료실 → PART 선택 → 다운로드" />
           </div>
         </div>
@@ -191,26 +200,67 @@ function MetaRow({ label, value }: { readonly label: string; readonly value: str
 }
 
 function ResourceLink({ resource }: { readonly resource: BookResource }) {
-  const isReady = resource.status === "ready";
+  if (resource.type === "prompt") {
+    return <PromptResourceButton resource={resource} />;
+  }
+
+  return <DownloadResourceLink resource={resource} label="실습자료 다운로드" />;
+}
+
+function DownloadResourceLink({
+  resource,
+  label,
+  variant = "light",
+}: {
+  readonly resource: BookResource;
+  readonly label: string;
+  readonly variant?: "light" | "dark";
+}) {
+  const isDark = variant === "dark";
+  const chapterLabel = resource.chapter
+    ? `Chapter ${String(resource.chapter).padStart(2, "0")}`
+    : resource.type === "full-project"
+      ? "PART 1~8"
+      : `PART ${resource.part}`;
+  const formatLabel = resource.mimeType.includes("markdown") ? "MD" : "XLSX";
 
   return (
-    <Link
-      href={isReady ? resource.href : "#qr-guide"}
-      aria-disabled={!isReady}
-      className="flex min-h-11 items-center justify-between gap-3 rounded-xl border border-[var(--color-border-default)] px-3 text-sm transition hover:border-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
+    <a
+      href={resource.downloadPath}
+      download={resource.fileName}
+      className={
+        isDark
+          ? "flex min-h-12 items-center justify-between gap-3 rounded-xl border border-white/25 bg-white/10 px-3 text-sm transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          : "flex min-h-11 items-center justify-between gap-3 rounded-xl border border-[var(--color-border-default)] px-3 text-sm transition hover:border-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-action-primary)]"
+      }
+      aria-label={`${resource.title} 다운로드 (${formatLabel} · ${chapterLabel})`}
     >
-      <span className="flex min-w-0 items-center gap-2 font-semibold text-[var(--color-brand-primary)]">
-        {resource.kind === "prompt" ? (
-          <FileText aria-hidden="true" className="size-4 shrink-0 text-[var(--color-action-primary)]" />
-        ) : (
-          <Download aria-hidden="true" className="size-4 shrink-0 text-[var(--color-action-primary)]" />
-        )}
-        <span className="truncate">{resource.label}</span>
+      <span
+        className={`flex min-w-0 items-center gap-2 font-semibold ${
+          isDark ? "text-white" : "text-[var(--color-brand-primary)]"
+        }`}
+      >
+        <Download
+          aria-hidden="true"
+          className={`size-4 shrink-0 ${isDark ? "text-white/85" : "text-[var(--color-action-primary)]"}`}
+        />
+        <span className="min-w-0">
+          <span className="block truncate">{label}</span>
+          <span className={`block truncate text-xs font-medium ${isDark ? "text-white/70" : "text-[var(--color-text-secondary)]"}`}>
+            {resource.title}
+          </span>
+        </span>
       </span>
-      <span className="shrink-0 rounded-full bg-[var(--color-action-muted)] px-2.5 py-1 text-xs font-semibold text-[var(--color-text-secondary)]">
-        {isReady ? "다운로드" : `${resourceLabels[resource.kind]} 예정`}
+      <span
+        className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${
+          isDark
+            ? "bg-white text-[var(--color-brand-primary)]"
+            : "bg-[var(--color-action-muted)] text-[var(--color-brand-primary)]"
+        }`}
+      >
+        {formatLabel} · {chapterLabel}
       </span>
-    </Link>
+    </a>
   );
 }
 

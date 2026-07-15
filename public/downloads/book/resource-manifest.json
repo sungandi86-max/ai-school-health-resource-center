@@ -1,0 +1,283 @@
+{
+  "book": "보건교사를 위한 AI 업무 자동화",
+  "parts": [
+    {
+      "part": 1,
+      "title": "왜 보건실은 늘 바쁠까",
+      "chapters": [
+        1,
+        2
+      ],
+      "projectFile": "projects/PART1_프로젝트파일.xlsx"
+    },
+    {
+      "part": 2,
+      "title": "반복되는 일을 발견하다",
+      "chapters": [
+        3,
+        4
+      ],
+      "projectFile": "projects/PART2_프로젝트파일.xlsx"
+    },
+    {
+      "part": 3,
+      "title": "첫 번째 실패, 화면부터 만들었습니다",
+      "chapters": [
+        5,
+        6,
+        7
+      ],
+      "projectFile": "projects/PART3_프로젝트파일.xlsx"
+    },
+    {
+      "part": 4,
+      "title": "화면을 닫고, 표부터 다시 만들다",
+      "chapters": [
+        8,
+        9,
+        10
+      ],
+      "projectFile": "projects/PART4_프로젝트파일.xlsx"
+    },
+    {
+      "part": 5,
+      "title": "작은 성공, 안내의 자리를 하나로 모으다",
+      "chapters": [
+        11,
+        12,
+        13
+      ],
+      "projectFile": "projects/PART5_프로젝트파일.xlsx"
+    },
+    {
+      "part": 6,
+      "title": "하나의 프로젝트가 다음 일을 데려오다",
+      "chapters": [
+        14,
+        15,
+        16
+      ],
+      "projectFile": "projects/PART6_프로젝트파일.xlsx"
+    },
+    {
+      "part": 7,
+      "title": "반복은 맡기고, 판단은 남기다",
+      "chapters": [
+        17,
+        18,
+        19
+      ],
+      "projectFile": "projects/PART7_프로젝트파일.xlsx"
+    },
+    {
+      "part": 8,
+      "title": "종이 없는 보건실은 화면이 아니라 운영입니다",
+      "chapters": [
+        20,
+        21,
+        22
+      ],
+      "projectFile": "projects/PART8_프로젝트파일.xlsx"
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "part": 1,
+      "title": "하루 종일 바빴는데, 아침 파일은 그대로였습니다",
+      "artifact": "하루 한 장면 해부표",
+      "promptFile": "prompts/CH01_하루_한_장면_해부표_프롬프트.md",
+      "practiceFile": "practice/실습01_하루_한_장면_해부표.xlsx",
+      "projectFile": "projects/PART1_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 2,
+      "part": 1,
+      "title": "나를 자꾸 같은 자리로 돌려보내는 일을 적었습니다",
+      "artifact": "반복 장면 기록지",
+      "promptFile": "prompts/CH02_반복_장면_기록지_프롬프트.md",
+      "practiceFile": "practice/실습02_반복_장면_기록지.xlsx",
+      "projectFile": "projects/PART1_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 3,
+      "part": 2,
+      "title": "이 일은 끝까지 사람이 해야 합니다",
+      "artifact": "사람·AI·정보 경계표",
+      "promptFile": "prompts/CH03_사람·AI·정보_경계표_프롬프트.md",
+      "practiceFile": "practice/실습03_사람·AI·정보_경계표.xlsx",
+      "projectFile": "projects/PART2_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 4,
+      "part": 2,
+      "title": "AI보다 먼저, 업무를 더 작게 나눴습니다",
+      "artifact": "첫 개선 과제 선정표",
+      "promptFile": "prompts/CH04_첫_개선_과제_선정표_프롬프트.md",
+      "practiceFile": "practice/실습04_첫_개선_과제_선정표.xlsx",
+      "projectFile": "projects/PART2_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 5,
+      "part": 3,
+      "title": "예쁜 홈페이지를 만든 줄 알았습니다",
+      "artifact": "첫 이상 징후 기록",
+      "promptFile": "prompts/CH05_첫_이상_징후_기록_프롬프트.md",
+      "practiceFile": "practice/실습05_첫_이상_징후_기록.xlsx",
+      "projectFile": "projects/PART3_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 6,
+      "part": 3,
+      "title": "하나를 고칠수록 다른 곳이 어긋났습니다",
+      "artifact": "사용자 흐름 실패 지도",
+      "promptFile": "prompts/CH06_사용자_흐름_실패_지도_프롬프트.md",
+      "practiceFile": "practice/실습06_사용자_흐름_실패_지도.xlsx",
+      "projectFile": "projects/PART3_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 7,
+      "part": 3,
+      "title": "문제는 화면이 아니라 순서였습니다",
+      "artifact": "재설계 기준 메모",
+      "promptFile": "prompts/CH07_재설계_기준_메모_프롬프트.md",
+      "practiceFile": "practice/실습07_재설계_기준_메모.xlsx",
+      "projectFile": "projects/PART3_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 8,
+      "part": 4,
+      "title": "화면을 닫고, 업무를 한 줄씩 적었습니다",
+      "artifact": "업무 분해 초안",
+      "promptFile": "prompts/CH08_업무_분해_초안_프롬프트.md",
+      "practiceFile": "practice/실습08_업무_분해_초안.xlsx",
+      "projectFile": "projects/PART4_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 9,
+      "part": 4,
+      "title": "‘확인한다’는 말 앞에서 다시 멈췄습니다",
+      "artifact": "행동 기준표",
+      "promptFile": "prompts/CH09_행동_기준표_프롬프트.md",
+      "practiceFile": "practice/실습09_행동_기준표.xlsx",
+      "projectFile": "projects/PART4_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 10,
+      "part": 4,
+      "title": "같은 곳에 놓으니 흐름이 보였습니다",
+      "artifact": "업무 설계표",
+      "promptFile": "prompts/CH10_업무_설계표_프롬프트.md",
+      "practiceFile": "practice/실습10_업무_설계표.xlsx",
+      "projectFile": "projects/PART4_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 11,
+      "part": 5,
+      "title": "표는 데이터가 아니라 업무였습니다",
+      "artifact": "업무 단위 정의표",
+      "promptFile": "prompts/CH11_업무_단위_정의표_프롬프트.md",
+      "practiceFile": "practice/실습11_업무_단위_정의표.xlsx",
+      "projectFile": "projects/PART5_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 12,
+      "part": 5,
+      "title": "열 하나에도 이유가 있어야 했습니다",
+      "artifact": "컬럼 설계표",
+      "promptFile": "prompts/CH12_컬럼_설계표_프롬프트.md",
+      "practiceFile": "practice/실습12_컬럼_설계표.xlsx",
+      "projectFile": "projects/PART5_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 13,
+      "part": 5,
+      "title": "처음으로 구조가 움직였습니다",
+      "artifact": "첫 업무 구조",
+      "promptFile": "prompts/CH13_첫_업무_구조_프롬프트.md",
+      "practiceFile": "practice/실습13_첫_업무_구조.xlsx",
+      "projectFile": "projects/PART5_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 14,
+      "part": 6,
+      "title": "입력이 아니라 흐름을 먼저 연결했습니다",
+      "artifact": "Workflow 초안",
+      "promptFile": "prompts/CH14_Workflow_초안_프롬프트.md",
+      "practiceFile": "practice/실습14_Workflow_초안.xlsx",
+      "projectFile": "projects/PART6_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 15,
+      "part": 6,
+      "title": "같은 정보를 두 번 적지 않게 되었습니다",
+      "artifact": "중복 제거표",
+      "promptFile": "prompts/CH15_중복_제거표_프롬프트.md",
+      "practiceFile": "practice/실습15_중복_제거표.xlsx",
+      "projectFile": "projects/PART6_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 16,
+      "part": 6,
+      "title": "처음으로 업무가 끝까지 이어졌습니다",
+      "artifact": "첫 Workflow 완성본",
+      "promptFile": "prompts/CH16_첫_Workflow_완성본_프롬프트.md",
+      "practiceFile": "practice/실습16_첫_Workflow_완성본.xlsx",
+      "projectFile": "projects/PART6_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 17,
+      "part": 7,
+      "title": "처음으로 AI에게 한 줄을 맡겼습니다",
+      "artifact": "첫 AI 요청문",
+      "promptFile": "prompts/CH17_첫_AI_요청문_프롬프트.md",
+      "practiceFile": "practice/실습17_첫_AI_요청문.xlsx",
+      "projectFile": "projects/PART7_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 18,
+      "part": 7,
+      "title": "맡길 일보다 남길 일을 먼저 정했습니다",
+      "artifact": "AI 역할표",
+      "promptFile": "prompts/CH18_AI_역할표_프롬프트.md",
+      "practiceFile": "practice/실습18_AI_역할표.xlsx",
+      "projectFile": "projects/PART7_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 19,
+      "part": 7,
+      "title": "반복은 줄고 판단은 남았습니다",
+      "artifact": "AI Workflow 1.0",
+      "promptFile": "prompts/CH19_AI_Workflow_1.0_프롬프트.md",
+      "practiceFile": "practice/실습19_AI_Workflow_1.0.xlsx",
+      "projectFile": "projects/PART7_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 20,
+      "part": 8,
+      "title": "처음으로 학교에서 움직였습니다",
+      "artifact": "운영 기록표",
+      "promptFile": "prompts/CH20_운영_기록표_프롬프트.md",
+      "practiceFile": "practice/실습20_운영_기록표.xlsx",
+      "projectFile": "projects/PART8_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 21,
+      "part": 8,
+      "title": "혼자 쓰는 도구에서 함께 쓰는 시스템이 되었습니다",
+      "artifact": "운영 체크리스트",
+      "promptFile": "prompts/CH21_운영_체크리스트_프롬프트.md",
+      "practiceFile": "practice/실습21_운영_체크리스트.xlsx",
+      "projectFile": "projects/PART8_프로젝트파일.xlsx"
+    },
+    {
+      "chapter": 22,
+      "part": 8,
+      "title": "자동화보다 오래 남는 것을 만들었습니다",
+      "artifact": "나만의 운영 선언문",
+      "promptFile": "prompts/CH22_나만의_운영_선언문_프롬프트.md",
+      "practiceFile": "practice/실습22_나만의_운영_선언문.xlsx",
+      "projectFile": "projects/PART8_프로젝트파일.xlsx"
+    }
+  ]
+}
