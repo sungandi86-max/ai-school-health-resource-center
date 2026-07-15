@@ -64,7 +64,7 @@
 | 순서 | 문서 | 기록 대상 | 상태 |
 |---:|---|---|---|
 | 1 | [README.md](README.md) | 프로젝트 목적, 근거, 범위, 문서 지도 | 작성 완료 |
-| 2 | [BOOK_STYLE.md](BOOK_STYLE.md) | 책 전체의 편집·시각 스타일 | 작성 예정 |
+| 2 | [BOOK_STYLE.md](BOOK_STYLE.md) | 책 전체의 편집·시각 스타일 | 작성 완료 |
 | 3 | [WRITING_STYLE.md](WRITING_STYLE.md) | 문장, 어조, 서술 방식 | 작성 예정 |
 | 4 | [BOOK_STRUCTURE.md](BOOK_STRUCTURE.md) | PART와 Chapter의 전체 구조 | 작성 예정 |
 | 5 | [PART_TEMPLATE.md](PART_TEMPLATE.md) | PART 반복 구조 | 작성 예정 |
