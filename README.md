@@ -69,7 +69,7 @@
 | 4 | [BOOK_STRUCTURE.md](BOOK_STRUCTURE.md) | PART와 Chapter의 전체 구조 | 작성 완료 |
 | 5 | [PART_TEMPLATE.md](PART_TEMPLATE.md) | PART 반복 구조 | 작성 완료 |
 | 6 | [CHAPTER_TEMPLATE.md](CHAPTER_TEMPLATE.md) | Chapter 반복 구조 | 작성 완료 |
-| 7 | [PROJECTBOOK_RULES.md](PROJECTBOOK_RULES.md) | 프로젝트북으로 작동하는 규칙 | 작성 예정 |
+| 7 | [PROJECTBOOK_RULES.md](PROJECTBOOK_RULES.md) | 프로젝트북으로 작동하는 규칙 | 작성 완료 |
 | 8 | [CASE_GUIDE.md](CASE_GUIDE.md) | 사례 제시 방식 | 작성 예정 |
 | 9 | [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) | Workflow 설명 방식 | 작성 예정 |
 | 10 | [RESOURCE_POLICY.md](RESOURCE_POLICY.md) | 실습·다운로드 자료 운영 방식 | 작성 예정 |
